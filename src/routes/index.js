@@ -1,28 +1,25 @@
-const express = require('express');
+const express = require("express");
+const bodyParser = require("body-parser");
 
-const bodyParser = require('body-parser');
+// const userRouter = require("./user");
+// const adminRouter = require("./admin");
+// const productRouter = require("./product");
+// const cartRouter = require("./cart");
+// const orderRouter = require("./order");
 
-
-const app = express()
-
-
-// const userRoute = require('../routes/users')
-// const productRoute = require('../routes/product')
-// const orderRoute = require ('../routes/orders')
-// const cartRoute = require ('../routes/carts')
-
+const app = express();
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: false }));
 
-
-// app.use('/api/user', userRoute)
-// app.use('/api/products', productRoute)
-// app.use('/api/orders', orderRoute)
-// app.use('/api/carts', cartRoute)
+// app.use("/", userRouter);
+// app.use("/admin", adminRouter);
+// app.use("/product", productRouter);
+// app.use("/cart", cartRouter);
+// app.use("/order", orderRouter);
 
 app.get("/", (req, res) => {
-    res.send("welcome to ire miwa api")
-})
+  res.send("welcome to ire store");
+});
 
 module.exports = app;

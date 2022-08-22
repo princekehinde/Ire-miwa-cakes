@@ -1,18 +1,21 @@
-const server= require ('./src/routes/index');
- const db = require ('./src/config/db')
-const key = require ('./src/config/keys')
+const server = require('./src/routes/index');
+const dotenv = require('dotenv').config
 
-const Port = process.env.PORT || 6000
+
+const port = process.env.PORT || 4000;
+
+
+require('dotenv').config();
+const db = require('./src/config/db');
 
 db()
-    .then(() => {
-        console.log('mongo_db database is  connected');
-    }).catch(error => {
-        console.log(error)
-    });
+  .then(() => {
+    console.log('Database connected');
+  })
+  .catch((err) => {
+    console.log(`Database connection failed ${err}`);
+  });
 
-// running the app service
-
-server.listen(Port, () => {
-    console.log(`backend server running in ${process.env.NODE_ENV} mode on port ${Port}`)
-})
+server.listen(port, () => {
+  console.log(`Web Service Running on: ${port}`)
+});

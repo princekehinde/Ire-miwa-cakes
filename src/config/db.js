@@ -1,16 +1,19 @@
-const mongoose = require('mongoose');
-const { TEST_DB, DATA_DB } = require('./keys');
+const mongoose = require("mongoose");
+const dotenv = require("dotenv");
+dotenv.config();
 
 let mongoUrl = null;
 
-
 const mongoConnection = () => {
-    if (process.env.NODE_ENV === 'development') {
-        mongoUrl ='mongodb://localhost:27017/ecommerce-api'
-    } else {
-        mongoUrl = TEST_DB;
-    }
-    return mongoose.connect(mongoUrl);
-}
+  if (process.env.NODE_ENV === "diva cake") {
+    mongoUrl = TEST_DB || "mongodb://localhost:27017";
+  } else {
+    mongoUrl = process.env.DATABASE_URI;
+  }
+  return mongoose.connect(mongoUrl, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
+};
 
 module.exports = mongoConnection;
