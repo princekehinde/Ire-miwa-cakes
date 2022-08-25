@@ -54,5 +54,37 @@ class UserManager {
         }
       }
     
-}
+      /**
+       * @description - this method is used to login a user
+       * @param {object} data - the data of the user
+       * @param {object} - the response of the user
+       */
+      static async login(data) {
+          const { email, password } = data;
+          const User = await UserModel.findOne({ email: email.toLowerCase() });
+          if (!User)
+          return {
+              statusCode: 400,
+              message: "User not found",
+            };
+
+            const isPasswordValid = await bcrypt.hashSync(password, User.password);
+            if (!isPasswordValid)
+            return {  
+              statusCode: 401,
+                message: "Invalid password", 
+              };
+
+              // const token = await jwt.generateToken(User);
+            return {
+              statusCode: 200,
+              message: "Login successful",
+              // data: {
+              //   token,
+              //   User: await UserManager.userResponse(User),
+              //   },
+               }
+              };
+              }
+
 module.exports = UserManager

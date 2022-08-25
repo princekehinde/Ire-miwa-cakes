@@ -5,7 +5,7 @@ dotenv.config();
 let mongoUrl = null;
 
 const mongoConnection = () => {
-  if (process.env.NODE_ENV === "diva cake") {
+  if (process.env.NODE_ENV === "production") {
     mongoUrl = TEST_DB || "mongodb://localhost:27017";
   } else {
     mongoUrl = process.env.DATABASE_URI;
