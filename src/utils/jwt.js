@@ -2,7 +2,7 @@
 const dotenv = require("dotenv");
 const jwt = require("jsonwebtoken");
 const UserModel = require("../model/user");
-// const AdminManager = require("../modules/admin-manager");
+const AdminManager = require("../modules/admin-manager");
 
 dotenv.config();
 
@@ -12,7 +12,7 @@ class JWT {
    * @param {Object} user - The user object
    * @returns {String} - The user token
    */
-  static async generateToken(data, superAdmin = false) {
+  static async generateToken(user, superAdmin = false) {
     let payload;
 
     if (!superAdmin) {

@@ -1,5 +1,5 @@
 const { decodeToken } = require("../utils/jwt");
-const { decodeAdminToken } = require("../utils/jwt-admin");
+// const { decodeAdminToken } = require("../utils/jwt-admin");
 const { errorResponse } = require("../utils/response");
 
 async function isUserAuthenticated(req, res, next) {

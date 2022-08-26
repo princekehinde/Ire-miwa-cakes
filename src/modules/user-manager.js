@@ -1,5 +1,5 @@
 const bcrypt = require('bcryptjs');
-const jwt = require('../utils/jwt');
+const JWT = require('../utils/jwt');
 const UserModel = require('../model/user');
 
 class UserManager {
@@ -75,16 +75,48 @@ class UserManager {
                 message: "Invalid password", 
               };
 
-              // const token = await jwt.generateToken(User);
+              const token = await JWT.generateToken(User);
             return {
               statusCode: 200,
               message: "Login successful",
-              // data: {
-              //   token,
-              //   User: await UserManager.userResponse(User),
-              //   },
+              data: {
+                token,
+                User: await UserManager.userResponse(User),
+                },
                }
               };
+
+   /**
+   * @description - This method is used to change the password of a user
+   * @param {object} data - The data of the user
+   * @returns {object} - The response of the user
+   */
+  static async changePassword(data) {
+    const { oldPassword, newPassword } = data;
+    const user = await UserModel.findById(data.id);
+
+    // update password if old password is valid
+    const isPasswordValid = await bcrypt.compareSync(
+      oldPassword,
+      user.password
+    );
+    if (!isPasswordValid)
+      return {
+        statusCode: 401,
+        message: "Invalid password",
+      };
+
+    const hashPassword = await bcrypt.hashSync(newPassword, 10);
+    await UserModel.findByIdAndUpdate(data.id, { password: hashPassword });
+
+    return {
+      statusCode: 200,
+      message: "Password changed successfully",
+    };
+  }
+
+
+
               }
 
 module.exports = UserManager

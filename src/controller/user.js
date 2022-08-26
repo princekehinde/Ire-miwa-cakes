@@ -44,6 +44,28 @@ class UserController {
     return errorResponse(res, 500, error.message)
     }
     }
+
+    static async changePassword(req, res) {
+        try {
+            const result = await UserManager.changePassword({
+                ...req.body,
+                id: req.user.id,
+            });
+
+            if (result.statusCode === 400) 
+            return errorResponse(res, result.statusCode, result.message);
+
+            return successResponse(
+                res,
+                result.statusCode,
+                result.message,
+                result.data
+            )
+        } catch (error) {
+            return errorResponse(res, error.statusCode, error.message);
+        }
+}
+
 }
 
 module.exports = UserController;

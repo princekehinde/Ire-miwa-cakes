@@ -18,6 +18,22 @@ class userValidator{
               return errorResponse(res, 400, error.message);
             }
           }
+
+          static async changePasswordForm(req, res, next) {
+            try {
+      const changePasswordFormSchema = Joi.object().keys({
+        oldPassword: Joi.string().required(),
+        newPassword: Joi.string().min(8).required(),
+      });
+
+      await changePasswordFormSchema.validateAsync(req.body, {
+        abortEarly: false,
+      });
+      next();
+    } catch (error) {
+      return errorResponse(res, 400, error.message);
+    }
+  }
 }
 
 module.exports = userValidator;
