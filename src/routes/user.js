@@ -19,6 +19,5 @@ router.put(
   Middleware.isUserAuthenticated,
   userValidator.changePasswordForm,
   userController.changePassword
-)  
-
+)
 module.exports = router;

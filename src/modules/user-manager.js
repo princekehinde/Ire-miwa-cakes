@@ -1,6 +1,7 @@
 const bcrypt = require('bcryptjs');
 const JWT = require('../utils/jwt');
 const UserModel = require('../model/user');
+const EmailService = require('../utils/node-mail')
 
 class UserManager {
     constructor() {}
@@ -114,9 +115,7 @@ class UserManager {
       message: "Password changed successfully",
     };
   }
-
-
-
-              }
+  
+ }
 
 module.exports = UserManager
