@@ -19,6 +19,22 @@ class ProductValidation {
             return errorResponse(res, 400, error.message);
         }
     }
+
+    static async getProductById(req, res, next){
+        try {
+            const getProductByIdSchema = Joi.object({
+                id: Joi.string().required(),
+                })
+
+            await getProductByIdSchema.validateAsync(req.body,{
+                abortEarly: false,
+            })
+            next();    
+        }catch(error) {
+            return errorResponse(res, 400, error.message);
+
+        }
+    }
 }
 
 module.exports = ProductValidation;

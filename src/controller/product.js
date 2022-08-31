@@ -21,17 +21,39 @@ class ProductController {
                 );
         } catch (error) {
             return errorResponse(res, 500, error.message)
-            
         }
     }
 
-    // static async get(req, res, next) {
-    //     try{
+    static async getProducts(req, res, next) {
+        try{
+            const result = await ProductManager.getProducts(req.params);
+            console.log(result);
 
-    //     }catch(error){
-    //         return errorResponse(res, 500, error.message)
-    //     };
-    // }
+            return paginationSuccessResponse(
+                res,
+                result.statusCode,
+                result.message,
+                result.data,
+            )
+        }catch(error){
+            return errorResponse(res, 500, error.message)
+        };
+    }
+
+    static async getProductById(req, res, next) {
+        try {
+            const result = await ProductManager.getProductById(req.params)
+            
+            return successResponse(
+                res,
+                result.statusCode,
+                result.message,
+                result.data
+            )
+        } catch (error) {
+            return errorResponse(res, 500, error.message)
+        }
+    }
 }
 
 module.exports = ProductController

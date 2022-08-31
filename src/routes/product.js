@@ -12,16 +12,16 @@ router.post(
     Controller.createProduct
 )
 
-// router.get(
-//     '/',
-//     Controller.getProducts
-//     )
+router.get(
+    '/',
+    Controller.getProducts
+    )
 
-// router.get(
-//     '/:id',
-//     Validator.getProductById,
-//     Controller.getProductById
-// )
+router.get(
+    '/:id',
+    Validator.getProductById,
+    Controller.getProductById
+)
 
 
 module.exports = router;

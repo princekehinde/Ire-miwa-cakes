@@ -33,6 +33,50 @@ class ProductManager {
             data: createProduct,
           };
         }
+
+        /**
+         * @description - this method is used to get all products
+         * @param {Object} query - the query to be used
+         * @param {Object} - the response of the products
+         */
+        static async getProducts(data) {
+          const {page, limit } = data;
+
+          const pageQuery = {
+            page: page ? parseInt(page) : 1,
+            limit: limit ? parseInt(limit) :10,
+          };
+          const products = await ProductModel.paginate({}, pageQuery);
+
+          return {
+            statusCode: 200,
+            message: 'Product retrieved successfully',
+            data: products,
+          };
+      };
+
+      /**
+       * @description -  this method is used get a particular product
+       * @param { Object } query - the query 
+       * @param { Object } - the response of
+       */
+      static async getProductById(data){
+        const { id } = data;
+
+        const products = await ProductModel.findById(id);
+
+        if(!products)
+          return{
+            statusCode: 404,
+            message: 'Product not found',
+          }
+        return {
+          statusCode: 200,
+          message: 'Product Found successfully',
+          data: products
+        }
+
+      }
 }
 
 module.exports = ProductManager;
