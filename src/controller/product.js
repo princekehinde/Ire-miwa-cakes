@@ -27,7 +27,6 @@ class ProductController {
     static async getProducts(req, res, next) {
         try{
             const result = await ProductManager.getProducts(req.params);
-            console.log(result);
 
             return paginationSuccessResponse(
                 res,

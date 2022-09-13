@@ -11,8 +11,8 @@ async function isUserAuthenticated(req, res, next) {
 
   const user = await decodeToken(authorization);
 
-  // if (!user || user.statusCode === 401)
-  //   return errorResponse(res, 401, "Invalid user token");
+  if (!user || user.statusCode === 401)
+    return errorResponse(res, 401, "Invalid user token");
 
   return next();
 }
