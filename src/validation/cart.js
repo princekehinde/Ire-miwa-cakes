@@ -7,7 +7,7 @@ class CartValidator{
             const createCartSchema = Joi.object({
                 productId: Joi.string().required(),
                 quantity: Joi.number().default(1),
-                userId: Joi.string().required()
+                
             })
             await createCartSchema.validateAsync(req.body,{
                 abortEarly: false,

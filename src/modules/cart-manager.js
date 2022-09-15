@@ -51,6 +51,78 @@ class CartManager {
             statusCode: 200,
             message: "Item quatity as increase",
         };
-}
+     }
+
+   /**
+  *@description - this method is used to decrease the quantity of a cart
+ * @param {Object} data - the data to be created
+ * @return {Object} - the updated cart
+ */
+  static async decreaseCartItemQuantity(data) {
+    const { userId, id } = data;
+    const cart = await CartModel.findOne({userId, productId: id});
+    if (!cart)
+        return{
+            statusCode: 400,
+            message: 'Item not found in cart',
+        };
+
+        cart.quantity -= 1;
+        cart.save();
+        return{
+            statusCode: 200,
+            message: "Item quatity as decrease",
+        };
+     }
+
+    /**
+     * @description - this method is used to delete item
+     * @param {Object} data - The data to be created
+     * @returns {Object} - The updated cart
+     */
+    static async deleteCartItem(data) {
+      const { userId, id } = data;
+      const cart = await CartModel.findOneAndDelete({ userId, productId: id });
+      if (!cart)
+        // return {
+        //   statusCode: 400,
+        //   message: "Item not found in cart",
+        // };
+      // cart.delete();
+      return {
+        statusCode: 200,
+        message: "Item deleted from cart",
+      };
+    }
+
+ /**
+   * @description - This method is used to get all cart items
+   * @param {Object} query - The query to be used
+   * @returns {Object} - The response of the cart items
+   */
+    static async getCartItems(data) {
+    const { userId } = data;
+    const cart = await CartModel.paginate(
+      { userId },
+      {
+        populate: [
+          {
+            path: "productId",
+            model: "Product",
+          },
+          {
+            path: "userId",
+            model: "User",
+            select: "email",
+          },
+        ],
+      }
+    );
+    return {
+      statusCode: 200,
+      message: "Cart items retrieved successfully",
+      data: cart,
+    };
+  }
   }
 module.exports = CartManager;

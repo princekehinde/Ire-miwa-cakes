@@ -16,16 +16,21 @@ Middleware.isUserAuthenticated,
 Controller.increaseCartItemsQuantity
 );
 
-// router.put(
-//   '/decrease/:id',
-//   Middleware.isUserAuthenticated,
-//   Controller.decreaseCartItemQuantity
-// );
+router.put(
+  '/decrease/:id',
+  Middleware.isUserAuthenticated,
+  Controller.decreaseCartItemsQuantity
+);
 
-// router.delete(
-//   '/:id',
-//   Middleware.isUserAuthenticated,
-//   Controller.deleteCartItem
-// )
+router.delete(
+  '/:id',
+  Middleware.isUserAuthenticated,
+  Controller.deleteCartItem
+)
+router.get(
+  '/',
+  Middleware.isUserAuthenticated,
+  Controller.getCartItem
+)
 
 module.exports = router
