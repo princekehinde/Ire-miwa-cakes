@@ -7,30 +7,30 @@ const router = express()
 
 router.post( '/',
   Middleware.isUserAuthenticated,
-  Validator.CreateCartForm,
+  Validator.createCartForm,
   Controller.createCart,
 )
 
-router.put( '/increase/:id',
-Middleware.isUserAuthenticated,
-Controller.increaseCartItemsQuantity
-);
+// router.put( '/increase/:id',
+// Middleware.isUserAuthenticated,
+// Controller.increaseCartItemsQuantity
+// );
 
-router.put(
-  '/decrease/:id',
-  Middleware.isUserAuthenticated,
-  Controller.decreaseCartItemsQuantity
-);
+// router.put(
+//   '/decrease/:id',
+//   Middleware.isUserAuthenticated,
+//   Controller.decreaseCartItemsQuantity
+// );
 
-router.delete(
-  '/:id',
-  Middleware.isUserAuthenticated,
-  Controller.deleteCartItem
-)
-router.get(
-  '/',
-  Middleware.isUserAuthenticated,
-  Controller.getCartItem
-)
+// router.delete(
+//   '/:id',
+//   Middleware.isUserAuthenticated,
+//   Controller.deleteCartItem
+// )
+// router.get(
+//   '/',
+//   Middleware.isUserAuthenticated,
+//   Controller.getCartItem
+// )
 
 module.exports = router

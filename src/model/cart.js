@@ -17,9 +17,9 @@ const CartSchema = new mongoose.Schema(
             type: Number,
             default: 1,
             },
-},
+        },
  { timestamps: true}
 )
 
 CartSchema.plugin(mongoosePaginate);
-module.exports = mongoose.model("CartModel", CartSchema);
+module.exports = mongoose.model("Cart", CartSchema);

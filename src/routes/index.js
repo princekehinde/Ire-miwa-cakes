@@ -5,7 +5,7 @@ const userRouter = require("./user");
 const adminRouter = require("./admin");
 const productRouter = require("./product");
 const cartRouter = require("./cart");
-// const orderRouter = require("./order");
+const orderRouter = require("./order");
 
 const app = express();
 
@@ -16,7 +16,7 @@ app.use("/", userRouter);
 app.use("/admin", adminRouter);
 app.use("/product", productRouter);
 app.use("/cart", cartRouter);
-// app.use("/order", orderRouter);
+app.use("/order", orderRouter);
 
 app.get("/", (req, res) => {
   res.send("welcome to ire store");

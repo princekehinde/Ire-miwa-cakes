@@ -9,6 +9,8 @@ const {
 class CartController{
     static async createCart(req, res) {
         try{
+          req.body.userId = req.user.id;
+          console.log(req.user.id)
             const result = await CartManager.createCart(req.body);
 
             if (result.statusCode === 400)
@@ -24,7 +26,7 @@ class CartController{
             return errorResponse(
                 res,
                 500,
-                'oops'
+                error.message
                 )
         }
     }
